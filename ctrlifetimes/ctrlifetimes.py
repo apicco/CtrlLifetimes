@@ -64,7 +64,7 @@ def barplot( l , filename , figsize ) :
 
 	# l is a list of ctralifetimes outputs
 
-	g , ( barplot ) = plt.subplots( 1 , 1 , gridspec_kw = { 'height_ratios' : [ 1 , 1 ] } , figsize = figsize )
+	g , ( barplot ) = plt.subplots( 1 , 1 , gridspec_kw = { 'height_ratios' : [ 1 ] , 'width_ratios' : [ 1 ] } , figsize = figsize )
 
 	barplot.bar( [ i + 1 for i in len( l ) ] , [ i[ 'average' ][ 0 ] for i in l ] , yerr = [ i[ 'average' ][ 1 ] for i in l ] , color = 'grey' , ecolor = 'black' )
 
