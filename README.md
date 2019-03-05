@@ -2,7 +2,7 @@
 
 Measure protein lifetimes in endocytic patches in yeasts from trajectories acquired from microscopy movies.
 
-#Example
+# Example
 
 	from ctrlifetimes.ctrlifetimes import ctrlifetimes as clt
 	from ctrlifetimes.ctrlifetimes import barplot 
