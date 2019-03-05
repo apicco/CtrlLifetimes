@@ -37,7 +37,7 @@ def average_lifetime( l , how ) :
 
 	return a 
 
-def ctrlifetimes( path , dt , how , protein_name , cutoff = ( - np.inf , np.inf ) , pattern = 'W1data' , comment_char = '%' , t_unit = 's' , coord_unit = 'pxl' , frames = 0 , coord = ( 1 , 2 ) , f = 3 ) :
+def ctrlifetimes( path , dt , how , protein_name , pattern , cutoff = ( - np.inf , np.inf ) , comment_char = '%' , t_unit = 's' , coord_unit = 'pxl' , frames = 0 , coord = ( 1 , 2 ) , f = 3 ) :
 
 	#wrapper to load the trajectories and compute their average_lifetime
 
@@ -54,8 +54,7 @@ def ctrlifetimes( path , dt , how , protein_name , cutoff = ( - np.inf , np.inf 
 			protein = protein_name
 			)
 
-	ml = measure_lifetimes( l , min_cutoff = cutoff[ 0 ] , max_cutoff = [ 1 ] )
-	 
+	ml = measure_lifetimes( l , min_cutoff = cutoff[ 0 ] , max_cutoff = cutoff[ 1 ] )
 	al = average_lifetime( ml , how )
 
 	return( { 'average' : al , 'lifetimes' : ml , 'name' : protein_name } )
@@ -66,14 +65,14 @@ def barplot( l , filename , figsize ) :
 
 	g , ( barplot ) = plt.subplots( 1 , 1 , gridspec_kw = { 'height_ratios' : [ 1 ] , 'width_ratios' : [ 1 ] } , figsize = figsize )
 
-	barplot.bar( [ i + 1 for i in len( l ) ] , [ i[ 'average' ][ 0 ] for i in l ] , yerr = [ i[ 'average' ][ 1 ] for i in l ] , color = 'grey' , ecolor = 'black' )
+	barplot.bar( [ i + 1 for i in range( len( l ) )] , [ i[ 'average' ][ 0 ] for i in l ] , yerr = [ i[ 'average' ][ 1 ] for i in l ] , color = 'grey' , ecolor = 'black' )
 
 	plt.subplot( barplot )
 	xaxt = []
 	for i in  range( len( l ) ):
 
-		plt.text( i + 1.4 , 1 , "n=" + str( len( l[ i ][ 'lifetimes' ] ) ) , horizontalalignment = 'center' )
-		xaxt.append( i + 1.4 )
+		plt.text( i + 1 , 1 , "n=" + str( len( l[ i ][ 'lifetimes' ] ) ) , horizontalalignment = 'center' )
+		xaxt.append( i + 1 )
 
 	plt.ylabel( "Abp1-mCherry lifetime (s)" ) 
 	barplot.set_xticks( xaxt )
