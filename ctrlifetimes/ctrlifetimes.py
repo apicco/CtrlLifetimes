@@ -78,8 +78,8 @@ def barplot( l , filename , figsize , ylabel , reference = [ np.nan , np.nan ] )
 	lw = 0.8
 
 	plt.plot( line_x , ( reference[ 0 ] , reference[ 0 ] ) , 'r' , linestyle = '-' , linewidth = 0.8 )
-	plt.plot( line_x , ( reference[ 0 ] , reference[ 0 ] ) - reference[ 1 ] , 'r' , linestyle = ':' , linewidth = 0.8 )
-	plt.plot( line_x , ( reference[ 0 ] , reference[ 0 ] ) + reference[ 1 ] , 'r' , linestyle = ':' , linewidth = 0.8 )
+	plt.plot( line_x , ( reference[ 0 ] - reference[ 1 ] , reference[ 0 ] - reference[ 1 ] ) , 'r' , linestyle = ':' , linewidth = 0.8 )
+	plt.plot( line_x , ( reference[ 0 ] + reference[ 1 ] , reference[ 0 ] + reference[ 1 ] ) , 'r' , linestyle = ':' , linewidth = 0.8 )
 	plt.ylabel( ylabel ) 
 	barplot.set_xticks( xaxt )
 	barplot.set_xticklabels( [ i[ 'name' ] for i in l ] )
