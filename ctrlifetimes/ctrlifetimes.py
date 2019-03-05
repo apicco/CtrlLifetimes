@@ -37,7 +37,7 @@ def average_lifetime( l , how ) :
 
 	return a 
 
-def ctrlifetimes( path , dt , how , protein_name , pattern , cutoff = ( - np.inf , np.inf ) , comment_char = '%' , t_unit = 's' , coord_unit = 'pxl' , frames = 0 , coord = ( 1 , 2 ) , f = 3 ) :
+def ctrlifetimes( path , dt , how , protein_name , pattern , cutoff = ( 1 , np.inf ) , comment_char = '%' , t_unit = 's' , coord_unit = 'pxl' , frames = 0 , coord = ( 1 , 2 ) , f = 3 ) :
 
 	#wrapper to load the trajectories and compute their average_lifetime
 
@@ -59,7 +59,7 @@ def ctrlifetimes( path , dt , how , protein_name , pattern , cutoff = ( - np.inf
 
 	return( { 'average' : al , 'lifetimes' : ml , 'name' : protein_name } )
 
-def barplot( l , filename , figsize , ylabel ) :
+def barplot( l , filename , figsize , ylabel , reference = [ np.nan , np.nan ] ) :
 
 	# l is a list of ctralifetimes outputs
 
@@ -73,7 +73,13 @@ def barplot( l , filename , figsize , ylabel ) :
 
 		plt.text( i + 1 , 1 , "n=" + str( len( l[ i ][ 'lifetimes' ] ) ) , horizontalalignment = 'center' )
 		xaxt.append( i + 1 )
+	
+	line_x = ( min( xaxt) - 0.5 , max( xaxt ) + 0.5 )
+	lw = 0.8
 
+	plt.plot( line_x , ( reference[ 0 ] , reference[ 0 ] ) , 'r' , linestyle = '-' , linewidth = 0.8 )
+	plt.plot( line_x , ( reference[ 0 ] , reference[ 0 ] ) - reference[ 1 ] , 'r' , linestyle = ':' , linewidth = 0.8 )
+	plt.plot( line_x , ( reference[ 0 ] , reference[ 0 ] ) + reference[ 1 ] , 'r' , linestyle = ':' , linewidth = 0.8 )
 	plt.ylabel( ylabel ) 
 	barplot.set_xticks( xaxt )
 	barplot.set_xticklabels( [ i[ 'name' ] for i in l ] )
