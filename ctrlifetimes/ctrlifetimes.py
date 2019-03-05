@@ -59,7 +59,7 @@ def ctrlifetimes( path , dt , how , protein_name , pattern , cutoff = ( - np.inf
 
 	return( { 'average' : al , 'lifetimes' : ml , 'name' : protein_name } )
 
-def barplot( l , filename , figsize ) :
+def barplot( l , filename , figsize , ylabel ) :
 
 	# l is a list of ctralifetimes outputs
 
@@ -74,7 +74,7 @@ def barplot( l , filename , figsize ) :
 		plt.text( i + 1 , 1 , "n=" + str( len( l[ i ][ 'lifetimes' ] ) ) , horizontalalignment = 'center' )
 		xaxt.append( i + 1 )
 
-	plt.ylabel( "Abp1-mCherry lifetime (s)" ) 
+	plt.ylabel( ylabel ) 
 	barplot.set_xticks( xaxt )
 	barplot.set_xticklabels( [ i[ 'name' ] for i in l ] )
 
