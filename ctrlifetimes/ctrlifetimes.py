@@ -27,7 +27,7 @@ def average_lifetime( l , how ) :
 
 		a = [ np.mean( l ) , np.std( l ) / np.sqrt( len( l ) ) ]
 
-	elif how = 'median' or how == 'Median' :
+	elif how == 'median' or how == 'Median' :
 		
 		a = [ np.nanmedian( l ) , MAD( l ) / np.sqrt( len( l ) ) ]
 
