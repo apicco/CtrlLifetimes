@@ -37,7 +37,7 @@ def average_lifetime( l , how ) :
 
 	return a 
 
-def ctrlifetimes( path , dt , how , protein_name , cutoff = ( - np.inf , np.inf ) , pattern = 'W1data' , comment_char = '%' , t_unit = 's' , frames = 0 , coord = ( 1 , 2 ) , f = 3 ) :
+def ctrlifetimes( path , dt , how , protein_name , cutoff = ( - np.inf , np.inf ) , pattern = 'W1data' , comment_char = '%' , t_unit = 's' , coord_unit = 'pxl' , frames = 0 , coord = ( 1 , 2 ) , f = 3 ) :
 
 	#wrapper to load the trajectories and compute their average_lifetime
 
@@ -48,7 +48,8 @@ def ctrlifetimes( path , dt , how , protein_name , cutoff = ( - np.inf , np.inf 
 			dt = dt ,
 			t_unit = t_unit , 
 			frames = frames ,
-			coord = coord , 
+			coord = coord ,
+			coord_unit = coord_unit ,
 			f = f , 
 			protein = protein_name
 			)
