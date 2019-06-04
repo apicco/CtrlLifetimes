@@ -59,7 +59,7 @@ def ctrlifetimes( path , dt , how , protein_name , pattern , cutoff = ( 1 , np.i
 
 	return( { 'average' : al , 'lifetimes' : ml , 'name' : protein_name } )
 
-def barplot( l , filename , figsize , ylabel , reference = [ np.nan , np.nan ] ) :
+def barplot( l , filename , figsize , ylabel , reference = [ np.nan , np.nan ] , x_rotation = 0 ) :
 
 	# l is a list of ctralifetimes outputs
 
@@ -81,7 +81,7 @@ def barplot( l , filename , figsize , ylabel , reference = [ np.nan , np.nan ] )
 	plt.plot( line_x , ( reference[ 0 ] - reference[ 1 ] , reference[ 0 ] - reference[ 1 ] ) , 'r' , linestyle = ':' , linewidth = 0.8 )
 	plt.plot( line_x , ( reference[ 0 ] + reference[ 1 ] , reference[ 0 ] + reference[ 1 ] ) , 'r' , linestyle = ':' , linewidth = 0.8 )
 	plt.ylabel( ylabel ) 
-	barplot.set_xticks( xaxt )
+	barplot.set_xticks( xaxt , rotation = x_rotation )
 	barplot.set_xticklabels( [ i[ 'name' ] for i in l ] )
 
 	g.savefig( filename )
