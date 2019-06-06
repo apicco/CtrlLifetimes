@@ -85,11 +85,16 @@ def barplot( l , filename , figsize , ylabel , reference = [ ] , x_rotation = 0 
 	barplot.bar( bplt_x , bplt_y , yerr = bplt_yerr , color = 'grey' , ecolor = 'black' )
 
 	plt.subplot( barplot )
+	
 	xaxt = [ 0 ]
+
+	plt.text( 0 , 1 , "n=" + str( len( reference[ 'lifetimes' ] ) ) , horizontalalignment = 'center' )
+
 	for i in  range( len( l ) ):
+		
+		xaxt.append( i + 1 )
 
 		plt.text( i + 1 , 1 , "n=" + str( len( l[ i ][ 'lifetimes' ] ) ) , horizontalalignment = 'center' )
-		xaxt.append( i + 1 )
 
 	plt.ylabel( ylabel ) 
 	barplot.set_xticks( xaxt )
