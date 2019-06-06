@@ -59,13 +59,28 @@ def ctrlifetimes( path , dt , how , protein_name , pattern , cutoff = ( 1 , np.i
 
 	return( { 'average' : al , 'lifetimes' : ml , 'name' : protein_name } )
 
-def barplot( l , filename , figsize , ylabel , reference = [ np.nan , np.nan ] , x_rotation = 0 ) :
+def barplot( l , filename , figsize , ylabel , reference = [ ] , x_rotation = 0 ) :
 
 	# l is a list of ctralifetimes outputs
+	# it can be that a user inputs a tuple instead
+	l = list( l ) 
 
 	g , ( barplot ) = plt.subplots( 1 , 1 , gridspec_kw = { 'height_ratios' : [ 1 ] , 'width_ratios' : [ 1 ] } , figsize = figsize )
 
-	barplot.bar( [ i + 1 for i in range( len( l ) )] , [ i[ 'average' ][ 0 ] for i in l ] , yerr = [ i[ 'average' ][ 1 ] for i in l ] , color = 'grey' , ecolor = 'black' )
+	#reference (f), if present,  is the first bar
+	if len( reference ) : 
+		
+		bplt_x = [ 0 ] + [ i + 1 for i in range( len( l ) ) ]
+		bplt_y = [ reference[ 'average' ][ 0 ] ] + [ i[ 'average' ][ 0 ] for i in l ]
+		bplt_yerr = [ reference[ 'average' ][ 1 ] ] + [ i[ 'average' ][ 1 ] for i in l ]
+
+	else :
+
+		bplt_x = [ i + 1 for i in range( len( l ) ) ]
+		bplt_y = [ i[ 'average' ][ 0 ] for i in l ]
+		bplt_yerr = [ i[ 'average' ][ 1 ] for i in l ]
+
+	barplot.bar( bplt_x , bplt_y , yerr = bplt_yerr , color = 'grey' , ecolor = 'black' )
 
 	plt.subplot( barplot )
 	xaxt = []
@@ -77,9 +92,9 @@ def barplot( l , filename , figsize , ylabel , reference = [ np.nan , np.nan ] ,
 	line_x = ( min( xaxt) - 0.5 , max( xaxt ) + 0.5 )
 	lw = 0.8
 
-	plt.plot( line_x , ( reference[ 0 ] , reference[ 0 ] ) , 'r' , linestyle = '-' , linewidth = 0.8 )
-	plt.plot( line_x , ( reference[ 0 ] - reference[ 1 ] , reference[ 0 ] - reference[ 1 ] ) , 'r' , linestyle = ':' , linewidth = 0.8 )
-	plt.plot( line_x , ( reference[ 0 ] + reference[ 1 ] , reference[ 0 ] + reference[ 1 ] ) , 'r' , linestyle = ':' , linewidth = 0.8 )
+	plt.plot( line_x , ( reference[ 'average' ][ 0 ] , reference[ 'average' ][ 0 ] ) , 'r' , linestyle = '-' , linewidth = 0.8 )
+	plt.plot( line_x , ( reference[ 'average' ][ 0 ] - reference[ 'average' ][ 1 ] , reference[ 'average' ][ 0 ] - reference[ 'average' ][ 1 ] ) , 'r' , linestyle = ':' , linewidth = 0.8 )
+	plt.plot( line_x , ( reference[ 'average' ][ 0 ] + reference[ 'average' ][ 1 ] , reference[ 'average' ][ 0 ] + reference[ 'average' ][ 1 ] ) , 'r' , linestyle = ':' , linewidth = 0.8 )
 	plt.ylabel( ylabel ) 
 	barplot.set_xticks( xaxt )
 	barplot.set_xticklabels( [ i[ 'name' ] for i in l ] , rotation = x_rotation )
