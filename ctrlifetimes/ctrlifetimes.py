@@ -73,30 +73,26 @@ def barplot( l , filename , figsize , ylabel , reference = [ ] , x_rotation = 0 
 		bplt_x = [ 0 ] + [ i + 1 for i in range( len( l ) ) ]
 		bplt_y = [ reference[ 'average' ][ 0 ] ] + [ i[ 'average' ][ 0 ] for i in l ]
 		bplt_yerr = [ reference[ 'average' ][ 1 ] ] + [ i[ 'average' ][ 1 ] for i in l ]
+		bplt_names = [ reference[ 'name' ] ] + [ i[ 'name' ] for i in l ]
 
 	else :
 
 		bplt_x = [ i + 1 for i in range( len( l ) ) ]
 		bplt_y = [ i[ 'average' ][ 0 ] for i in l ]
 		bplt_yerr = [ i[ 'average' ][ 1 ] for i in l ]
+		bplt_names = [ i[ 'name' ] for i in l ]
 
 	barplot.bar( bplt_x , bplt_y , yerr = bplt_yerr , color = 'grey' , ecolor = 'black' )
 
 	plt.subplot( barplot )
-	xaxt = []
+	xaxt = [ 0 ]
 	for i in  range( len( l ) ):
 
 		plt.text( i + 1 , 1 , "n=" + str( len( l[ i ][ 'lifetimes' ] ) ) , horizontalalignment = 'center' )
 		xaxt.append( i + 1 )
-	
-	line_x = ( min( xaxt) - 0.5 , max( xaxt ) + 0.5 )
-	lw = 0.8
 
-	plt.plot( line_x , ( reference[ 'average' ][ 0 ] , reference[ 'average' ][ 0 ] ) , 'r' , linestyle = '-' , linewidth = 0.8 )
-	plt.plot( line_x , ( reference[ 'average' ][ 0 ] - reference[ 'average' ][ 1 ] , reference[ 'average' ][ 0 ] - reference[ 'average' ][ 1 ] ) , 'r' , linestyle = ':' , linewidth = 0.8 )
-	plt.plot( line_x , ( reference[ 'average' ][ 0 ] + reference[ 'average' ][ 1 ] , reference[ 'average' ][ 0 ] + reference[ 'average' ][ 1 ] ) , 'r' , linestyle = ':' , linewidth = 0.8 )
 	plt.ylabel( ylabel ) 
 	barplot.set_xticks( xaxt )
-	barplot.set_xticklabels( [ i[ 'name' ] for i in l ] , rotation = x_rotation )
+	barplot.set_xticklabels( bplt_names , rotation = x_rotation )
 
 	g.savefig( filename )
