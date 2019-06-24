@@ -101,3 +101,48 @@ def barplot( l , filename , figsize , ylabel , reference = [ ] , x_rotation = 0 
 	barplot.set_xticklabels( bplt_names , rotation = x_rotation )
 
 	g.savefig( filename )
+
+def write_csv( path , data ) :
+
+	"write_csv: write the lifetimes in the result dictionary outputs of ctrlifetimes, inputed as a tuple, into a csv file named path.
+	The path includes the file name but not .csv, which is added automatically by the script" 
+	
+	f = open( path + '.csv' , "w" )
+
+	header = ""
+	data_len = []
+	l = len( data )
+
+	for i in range( l ) : 
+
+		header = header + data[ i ][ 'name' ] + "," 
+		data_len.append( len( data[ i ][ 'lifetimes' ] ) )
+	
+	f.write( header )
+	f.write( "\n" )
+
+	m = max( data_len )  
+	
+	for i in range( m ) :
+
+		line = ""
+
+		for ii in range( l ) :
+	
+			try 
+	
+				line = line + str( data[ ii ][ 'lifetimes' ][ i ] ) + "," 
+	
+			except :
+	
+				line = line + "" + ","
+
+		f.write( line )
+		f.write( "\n" )
+	
+	f.close()
+
+	
+	
+	
+
