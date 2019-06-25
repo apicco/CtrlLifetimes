@@ -104,8 +104,10 @@ def barplot( l , filename , figsize , ylabel , reference = [ ] , x_rotation = 0 
 
 def write_csv( path , data ) :
 
-	"write_csv: write the lifetimes in the result dictionary outputs of ctrlifetimes, inputed as a tuple, into a csv file named path.
-	The path includes the file name but not .csv, which is added automatically by the script" 
+	"""
+	write_csv: write the lifetimes in the result dictionary outputs of ctrlifetimes, inputed as a tuple, into a csv file named path.
+	The path includes the file name but not .csv, which is added automatically by the script
+	""" 
 	
 	f = open( path + '.csv' , "w" )
 
@@ -129,7 +131,7 @@ def write_csv( path , data ) :
 
 		for ii in range( l ) :
 	
-			try 
+			try :
 	
 				line = line + str( data[ ii ][ 'lifetimes' ][ i ] ) + "," 
 	
