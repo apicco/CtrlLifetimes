@@ -1,8 +1,8 @@
-# CtrlLifetimes
+#CtrlLifetimes
 
 Measure protein lifetimes in endocytic patches in yeasts from trajectories acquired from microscopy movies.
 
-##How to
+## How to
 
 _ctrlifetimes( path , dt , how , protein\_name , pattern , cutoff = ( 1 , np.inf ) , comment\_char = '%' , t\_unit = 's' , coord\_unit = 'pxl' , frames = 0 , coord = ( 1 , 2 ) , f = 3 )_ 
 
