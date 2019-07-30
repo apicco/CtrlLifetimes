@@ -59,6 +59,14 @@ def ctrlifetimes( path , dt , how , protein_name , pattern , cutoff = ( 1 , np.i
 
 	return( { 'average' : al , 'lifetimes' : ml , 'name' : protein_name } )
 
+def significance( c1 , c2 ) :
+
+	p = stats.mannwhitneyu( c1[ 'lifetimes' ] , c2[ 'lifetimes' ] )
+
+	print( 'H0: the distribution of ' + c1[ 'name' ] + ' is equal to the distribution of ' + c2[ 'name' ] + '. P value = ' + str( p[ 1 ] ) )
+
+	return p 
+
 def barplot( l , filename , figsize , ylabel , reference = [ ] , x_rotation = 0 ) :
 
 	# l is a list of ctralifetimes outputs
