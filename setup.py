@@ -1,8 +1,7 @@
 from distutils.core import setup
-from spotquant.measurespots import header
 
 setup( name = 'measre lifetimes' ,
-		version = str( header( printit = False ) ),
+		version = str( 1.0 ),
 		description = 'Utilities to quantify trajectories lifetimes' ,
 		author = 'Andrea Picco',
 		author_email = 'andrea.picco@unige.ch',
